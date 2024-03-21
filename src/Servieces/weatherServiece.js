@@ -5,7 +5,7 @@ const BASE_URL = 'https://api.openweathermap.org/data';
 
 const getWheatherData = async (infoType, searchParams, version) => {
     const url = `${BASE_URL}/${version}/${infoType}?${searchParams}&appid=${API_KEY}`
-    
+    console.log(url);
     try {
         const response = await fetch(url);
         const data = await response.json();
@@ -18,7 +18,7 @@ const getWheatherData = async (infoType, searchParams, version) => {
 const getFormattedWheatherData = async (searchParams) => {
     
     try {
-        const formattedCurrentWheather = await getWheatherData('weather', searchParams.queryStr, '2.5').then(formatCurrentWheather);
+        const formattedCurrentWheather = await getWheatherData('weather', `q=${searchParams.queryStr}&units=${searchParams.units}`, '2.5').then(formatCurrentWheather);
         
         const {lat, lon} = formattedCurrentWheather;
 

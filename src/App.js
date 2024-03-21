@@ -6,28 +6,40 @@ import TimeAndLocation from './Components/TimeAndLocation';
 import TempAndDetails from './Components/TempAndDetails';
 import Forecast from './Components/Forecast';
 import getFormattedWheatherData from './Servieces/weatherServiece';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 function App() {
 
-  const [query, setQuery] = useState({})
+  const [query, setQuery] = useState({queryStr: 'mumbai'});
+  const [units, setUnits] = useState('metric');
+  const [weather, setWeather] = useState(null);
 
-  const fetchWeather = async () => {
-    const data = await getFormattedWheatherData({queryStr: 'q=london'});
-    console.log(data);
-  }
+  useEffect(() => {
+    const fetchWeather = async () => {
+      const data = await getFormattedWheatherData({...query, units: units}).then(data => setWeather(data));
+      console.log(data);
+    }
+  
+    fetchWeather();
+  }, [query, units]);
 
-  fetchWeather();
+  
 
   return (
     <div className="mx-auto max-w-screen-md mt-4 py-5 px-32 bg-gradient-to-br from-cyan-700 to-blue-700 h-fit shadow-xl shadow-gray-400">
       <TopButtons />
       <Inputs />
-
-      <TimeAndLocation />
-      <TempAndDetails />
-      <Forecast title={'hourly'}/>
-      <Forecast title={'daily'}/>
+        {
+          weather && (
+            <div>
+              <TimeAndLocation weather={weather}/>
+              <TempAndDetails weather={weather}/>
+              <Forecast title={'hourly'} items={weather.hourly}/>
+              <Forecast title={'daily'} items={weather.daily}/>
+            </div>
+          )
+        }
+      
     </div>
   );
 }
