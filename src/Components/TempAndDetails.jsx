@@ -2,7 +2,7 @@ import React from 'react';
 import { UilArrowUp, UilArrowDown, UilTemperature, UilTear, UilWind, UilSun, UilSunset } from '@iconscout/react-unicons'
 import { formatToLocalTime, iconUrlFromCode } from '../Servieces/weatherServiece';
 
-function TempAndDetails({weather}) {
+function TempAndDetails({weather, units}) {
 
     const {details, icon, temp, temp_min, temp_max, sunrise, sunset, speed, humidity, feels_like, timezone} = weather
 
@@ -29,7 +29,7 @@ function TempAndDetails({weather}) {
                 <div className='flex font-light text-sm items-center justify-center'>
                     <UilWind size={18} className="mr-1"/>
                     Wind : 
-                    <span className='font-medium ml-1 '>{speed}Km/hr</span>
+                    <span className='font-medium ml-1 '>{speed}{units==='metric'?'Km/H':'Mi/H'}</span>
                 </div>
             </div>
         </div>

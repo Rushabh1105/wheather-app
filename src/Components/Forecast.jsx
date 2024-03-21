@@ -1,7 +1,4 @@
 import React from 'react';
-import partialcloudy from '../Assets/partialcloudy.png';
-import cloudy from '../Assets/cloudy.png';
-import rain from '../Assets/rain.png'
 import { iconUrlFromCode } from '../Servieces/weatherServiece';
 
 function Forecast({title, items}) {
