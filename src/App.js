@@ -21,7 +21,7 @@ function App() {
       const message = query.queryStr ? query.queryStr.slice(2) : 'current location';
       toast.info('fetching weather for ' + message);
       const data = await getFormattedWheatherData({...query, units: units}).then(data => {
-        toast.success(`successfully fetched weather for ${data.name}`)
+        toast.success(`successfully fetched weather `)
         setWeather(data)
       });
     }

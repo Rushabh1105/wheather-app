@@ -9,7 +9,7 @@ function Inputs({setQuery, units, setUnits}) {
 
   const handleSearch = () => {
     if(city !== ''){
-      setQuery({queryStr: city})
+      setQuery({queryStr: `q=${city}`})
     }
   }
 
