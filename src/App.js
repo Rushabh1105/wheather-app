@@ -5,8 +5,20 @@ import Inputs from './Components/Inputs';
 import TimeAndLocation from './Components/TimeAndLocation';
 import TempAndDetails from './Components/TempAndDetails';
 import Forecast from './Components/Forecast';
+import getFormattedWheatherData from './Servieces/weatherServiece';
+import { useState } from 'react';
 
 function App() {
+
+  const [query, setQuery] = useState({})
+
+  const fetchWeather = async () => {
+    const data = await getFormattedWheatherData({queryStr: 'q=london'});
+    console.log(data);
+  }
+
+  fetchWeather();
+
   return (
     <div className="mx-auto max-w-screen-md mt-4 py-5 px-32 bg-gradient-to-br from-cyan-700 to-blue-700 h-fit shadow-xl shadow-gray-400">
       <TopButtons />
